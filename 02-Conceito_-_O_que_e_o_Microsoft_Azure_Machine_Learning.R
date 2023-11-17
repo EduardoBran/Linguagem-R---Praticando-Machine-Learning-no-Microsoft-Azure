@@ -76,3 +76,36 @@ getwd()
 # - E uma vez este modelo já estando criado, iremos implementar este modelo fazendo o Deploy.
 #   Podemos utilizar este modelo para criação de apps para smartphones ou desktop.
 #   Podemos também integrar o modelo com dashboards criados com Power Bi.
+
+
+
+## O que é Azure Machine Learning Toolkit ?
+
+# - É um conjunto de ferramentas oferecidas no Azure Machine Learning Studio para todo o processo de modelagem preditiva.
+
+# - Entre todas as ferramentas oferecidas no Toolkit, as mais importantes são aquelas que permitem a construção dos modelos
+#   de Machine Learning. Portanto no Toolkit temos ferramentas para:
+
+#  -> Classificação: algoritmos usados para classificar dados em diferentes categorias e então fazer previsões sobre dados com
+#                    variáveis qualitativas.
+
+#  -> Regressão    : algoritmos usados para prever uma ou mais variáveis numéricas.
+
+#  -> Clustering   : algoritmos usados para identificar grupos ou padrões em conjuntos de dados e então fazer previsões de
+#                    classificação em grupos, para uma determinada variável.
+
+# - Classificação e Regresão são atividades de aprendizagem supervisionadas enquanto a Clustering é uma ativade não supervisionada.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
