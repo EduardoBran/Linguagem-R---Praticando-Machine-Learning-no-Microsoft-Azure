@@ -44,6 +44,23 @@ getwd()
 
 
 
+#### Trabalhando com Módulos 
+
+# Trabalhando com Módulos:
+
+# - Após escolher e arrastar um dataset para a área de trabalho, você pode adicionar módulos específicos para manipulação 
+#   de dados.
+# - Dentro do menu "Data Transformation - Manipulation", escolher o módulo "Select Columns in Dataset" e arrastá-lo para a 
+#   área de trabalho. (Seleção de colunas)
+# - Cada módulo possui portas de entrada e saída representadas por mini botões circulares na parte superior e inferior do 
+#   retângulo do módulo.
+# - Conectar a porta de saída de um módulo à porta de entrada de outro para estabelecer a sequência do fluxo de dados.
+
+# - Após conectar o módulo com dataset no módulo de seleção de colunas, clicar no módulo de seleção de colunas e no menu
+#   direito clicar em "Launch column selector", selecionar as colunas que iremos utilizar e passar para o lado direito.
+# - Após a seleção das colunas ("select" em R), clicar em "Run", aguardar e depois com o botão direito clicar no módulo,
+#   Results dataset e visualizar.
+
 
 
 
