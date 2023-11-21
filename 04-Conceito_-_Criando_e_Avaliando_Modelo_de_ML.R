@@ -77,3 +77,35 @@ getwd()
 # - Para visualizar o resultado final, clicar com o botão direito no módulo "Evaluate Model" e selecionar "Visualize", 
 #   onde irá aparecer as métricas de avaliação do modelo. O "coefficient of Determination" é o R-squared em R.
 
+
+
+
+##  Comparando a Performance entre dois Modelos de Machine Learning
+
+# Será que nós conseguiríamos um modelo com uma performance melhor utilizando outro algoritmo de regressão linear?
+
+
+# - Vamos buscar o módulo "Neural NetWork Regression", selecionar e arrastar para a mesma área de trabalho.
+
+# - Feito isso podemos selecionar o módulo de "Train Model" ou clicar em cima do já existem e selecionar "copy" e
+#   arrastar este novo módulo "Train Model" para a área de trabalho.
+# - Repetir o mesmo processo para o módulo "Score Model".
+
+# - Como o módulo "Train Model" foi 'copiado' do já existente, não precisamos selecionar a variável alvo pois ela já
+#   está escolhida. Se tivessemos colocado um novo módulo "Train Model" teríamos que repetir o processo de escolher a
+#   variável alvo.
+
+# - Agora vamos ligar o módulo "Neural NetWork Regression" na primeira porta de "Train Model" e ligar a primeira porta
+#   de saída de "Split Data" na segunda porta de entrada de "Train Model".
+
+# - Agora vamos ligar o módulo "Train Model" na primeira porta de entrada "Score Model" e ligar a segunda porta de saída
+#   de "Split Data" na segunda porta de entrada de "Score Model".
+
+# - Por fim ligar o módulo de "Score Model" na segunda porta de entrada de "Evaluate Model" e assim conseguiremos comparar
+#   os dois modelos.
+# - O módulo "Evaluate Model" possui duas portas de entrada que serve justamente para comparar os modelos.
+
+
+# - Agora ao clicar em "Visualize" do módulo "Evaluate Model" teremos a comparação das métricas de ambos os modelos.
+
+
