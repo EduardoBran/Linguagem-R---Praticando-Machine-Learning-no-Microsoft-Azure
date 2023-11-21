@@ -44,6 +44,7 @@ getwd()
 
 
 
+
 #### Trabalhando com Módulos 
 
 # Trabalhando com Módulos:
@@ -63,6 +64,23 @@ getwd()
 
 
 
+
+#### Importação e Exportação de Dados
+
+# - Clicar em "New" no menu inferior, escolher no menu lateral esquerdo "datasets" e carregar o arquivo.
+
+# - Dependendo do tamanho, pode levar até alguns minutos para carregar.
+
+# - Após carregar o arquivo, vamos em "Saved Datasets" no lad esquerdo e em "My Datasets" estará o nosso arquivo. 
+#   Agora basta arrastar e soltar na nossa área de trabalho.
+
+
+# O Azure ML tem uma série de módulos para entrada e saída de dados. Iremos explorar o menu "Data Input and Output"
+
+# - Vamos começar arrastando o módulo "Enter Data Manually", onde temos a opção de colocar os dados manualmente.
+# - O módulo "Import Data" é um módulo muito mais completo para adicionar dados.
+# - O módulo "Unpack Zipped Datasets" serve para compactar datasets muito grandes, ou seja, carregamos o arquivo "zipado".
+# - Diferente de "Import Data" onde temos apenas a porta de saída, o "Export Data" possui apenas a porta de entrada.
 
 
 
