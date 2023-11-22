@@ -109,3 +109,18 @@ getwd()
 # - Agora ao clicar em "Visualize" do módulo "Evaluate Model" teremos a comparação das métricas de ambos os modelos.
 
 
+
+## DOCUMENTAÇÃO E EXEMPLOS
+
+# - Ao clicar no módulo "Linear Regression" e ir no lad direito e clicar em "more help" abrirá uma página da Microsoft com a 
+#   documentação do algoritmo. 
+
+# - Na página web, podemos descer até o subtítulo "Examples" e ao clicar em um exemplo, poderemos visualizar todo um roteiro
+#   de um projeto já pronto.
+
+# - Podemos também clicar em "Open In Studio" e ele irá abrir o projeto direto no Azure ML.
+
+
+
+
+
