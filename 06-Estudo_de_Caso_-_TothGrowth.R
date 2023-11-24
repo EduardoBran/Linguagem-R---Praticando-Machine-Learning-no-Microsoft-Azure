@@ -36,6 +36,8 @@ library(GGally)
 dados <- ToothGrowth
 head(dados)
 
+View(dados)
+
 # Tipo de dados
 str(dados)
 summary(dados)
@@ -71,6 +73,12 @@ tipo_VC <-
   filter(supp == 'VC') %>% 
   na.omit(tipo_VC)
 
+
+
+
+
+
+#### RESPOSTA 1 (Não foi considerado a variável "dose")
 
 
 ##### Validações
@@ -125,7 +133,91 @@ t.test(tipo_OJ$len, tipo_VC$len, alternative = "two.sided")  # p-value = 0.06063
 
 
 
+#### RESPOSTA 2 (aplicando teste ANOVA e considerando variável "dose")
 
+# - É correto dizer que se houvesse apenas um valor de dose específico para cada tipo de suplemento ("supp"), o teste t seria
+#   apropriado. O teste t é apropriado para comparar as médias de dois grupos independentes, e neste caso, você teria dois grupos
+#   distintos (um para "VC" e outro para "OJ"), cada um com um único valor de dose.
+
+# - No entanto, como existem múltiplos valores de dose para cada tipo de suplemento, o teste de Análise de Variância (ANOVA)
+#   torna-se mais apropriado. O ANOVA é utilizado quando há mais de dois grupos a serem comparados e pode fornecer informações
+#   sobre as diferenças entre as médias de grupos com base nos níveis de uma ou mais variáveis independentes.
+
+# - Portanto, ao lidar com um design experimental em que há mais de um valor de dose para cada tipo de suplemento, o uso de
+#   ANOVA permite avaliar as diferenças globais entre os grupos, considerando tanto o efeito do tipo de suplemento quanto o
+#   efeito da dose, incluindo possíveis interações.
+
+
+teste_anova <- aov(len ~ supp, data = dados)  # valor-p 0.0604
+teste_anova
+
+summary(teste_anova)
+
+# Conclusão
+
+# - O valor-p é 0.0604, que é maior que o nível de significância comum de 0,05. Portanto, não há evidências suficientes para
+#   rejeitar a hipótese nula de que não há diferença significativa no crescimento dos dentes de acordo com o tipo de suplemento.
+
+# - Ou seja, não há uma diferença estatisticamente significativa entre os grupos de suplemento "VC" e "OJ" em relação ao
+#   comprimento dos dentes dos Porcos da Guiné, com base nos dados disponíveis.
+
+
+
+
+
+#### COMPARAÇÃO ENTRE A RESPOSTA 1 E RESPOSTA 2
+
+# - Dado que a variável "dose" possui valores aleatórios, é mais apropriado considerar a análise que inclui essa variável.
+#   A análise de variância (ANOVA) leva em conta a variação entre os diferentes níveis da variável "dose" e fornece uma visão 
+#   mais abrangente da relação entre as variáveis.
+
+# - Portanto, a Resposta 2 (Análise considerando a variável "dose") é mais apropriada neste contexto. 
+
+
+
+
+
+
+#### RESPOSTA 3 (Gabarito Professor)
+
+# Carregando dados
+dados <- ToothGrowth
+head(dados)
+
+?ToothGrowth
+
+# Tipo de dados
+str(dados)
+summary(dados)
+
+# Histograma da variável len
+hist(dados$len)
+
+# GGPairs
+ggpairs(dados)
+
+# BoxPlot por tipo de suplemento (supp)
+qplot(supp,
+      len,
+      data = dados,
+      main = "Crescimento dos Dentes dos Porcos da Guiné por Tipo de Suplemento",
+      xlab = "Tipo de Suplemento",
+      ylab = "Comprimento do Dente") +
+  geom_boxplot(aes(fill = supp))
+
+# - Analisando o BoxPlot acima podemos interpretar que parece haver uma diferença no crescimento dos dentes,
+#   associada ao tipo de suplemento. Será necessário validar.
+
+
+
+
+
+
+
+
+
+
+# - E agora ? O que fazer quando a suposição do teste estatístico não é satisfeita ?
 
 
 
