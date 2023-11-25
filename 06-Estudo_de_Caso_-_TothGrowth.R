@@ -122,11 +122,11 @@ t.test(tipo_OJ$len, tipo_VC$len, alternative = "two.sided")  # p-value = 0.06063
 
 ## Conclusão:
 
-# - Não há diferença significativa no crescimento dos dentes de acordo com o tipo de suplemento usado nos Porcos da Guiné, com base
-#   nos dados disponíveis neste estudo. 
+# - O valor de p de 0.06063 é maior que 0.05, indicando que não há evidências estatísticas suficientes para concluir que as médias
+#   dos grupos "OJ" e "VC" são diferentes em termos de crescimento dos dentes.
 
-# - O valor de p de 0.06063 é maior que 0.05, indicando que não há evidências estatísticas suficientes para concluir que as médias dos
-#   grupos "OJ" e "VC" são diferentes em termos de crescimento dos dentes.
+# - Portanto, não há diferença significativa no crescimento dos dentes de acordo com o tipo de suplemento usado nos Porcos da Guiné,
+#   com base nos dados disponíveis neste estudo. 
 
 
 
@@ -148,18 +148,34 @@ t.test(tipo_OJ$len, tipo_VC$len, alternative = "two.sided")  # p-value = 0.06063
 #   efeito da dose, incluindo possíveis interações.
 
 
-teste_anova <- aov(len ~ supp, data = dados)  # valor-p 0.0604
+teste_anova <- aov(len ~ supp * dose, data = dados) 
 teste_anova
 
 summary(teste_anova)
 
+
+# Explicando o uso de "supp * dose" ao invés de "supp + dose"
+
+# - Utilizando o "*": nesta formulação, o termo supp * dose inclui tanto os efeitos principais de "supp" e "dose" quanto a interação 
+#   entre eles. Isso significa que o modelo avaliará não apenas os efeitos independentes de "supp" e "dose" nas médias, mas também
+#   se há uma interação significativa entre "supp" e "dose" (ou seja, se o efeito de "supp" é diferente em diferentes níveis de
+#   "dose" e vice-versa).
+
+# - Utilizando o "+": nesta formulação, os termos supp e dose são considerados como efeitos principais sem uma interação explícita. 
+#   Isso significa que o modelo avaliará apenas os efeitos principais de "supp" e "dose" nas médias, sem considerar uma interação
+#   entre eles. Se houver uma interação real entre "supp" e "dose", essa formulação pode não capturar adequadamente esse efeito.
+
+
 # Conclusão
 
-# - O valor-p é 0.0604, que é maior que o nível de significância comum de 0,05. Portanto, não há evidências suficientes para
-#   rejeitar a hipótese nula de que não há diferença significativa no crescimento dos dentes de acordo com o tipo de suplemento.
+# - Com base nos resultados do teste ANOVA, podemos concluir que há diferenças significativas no crescimento dos dentes de acordo
+#   com o tipo de suplemento usado nos Porcos da Guiné.
 
-# - Ou seja, não há uma diferença estatisticamente significativa entre os grupos de suplemento "VC" e "OJ" em relação ao
-#   comprimento dos dentes dos Porcos da Guiné, com base nos dados disponíveis.
+# - Além disso, a dose do suplemento e a interação entre tipo de suplemento e dose também têm efeitos significativos nas médias
+#   dos grupos.
+
+# - Portanto, a resposta à pergunta é sim, há diferença significativa no crescimento dos dentes com base no tipo de suplemento, 
+#   dose e a interação entre eles
 
 
 
@@ -167,11 +183,28 @@ summary(teste_anova)
 
 #### COMPARAÇÃO ENTRE A RESPOSTA 1 E RESPOSTA 2
 
-# - Dado que a variável "dose" possui valores aleatórios, é mais apropriado considerar a análise que inclui essa variável.
-#   A análise de variância (ANOVA) leva em conta a variação entre os diferentes níveis da variável "dose" e fornece uma visão 
-#   mais abrangente da relação entre as variáveis.
+# Resposta 1: Teste t para médias entre os grupos "OJ" e "VC":
 
-# - Portanto, a Resposta 2 (Análise considerando a variável "dose") é mais apropriada neste contexto. 
+# - O teste t verifica se há uma diferença significativa nas médias do comprimento dos dentes entre os grupos "OJ" e "VC".
+#   O valor-p associado ao teste t é 0.06063, que é ligeiramente maior que 0.05. Portanto, não há evidências estatísticas suficientes
+#   para rejeitar a hipótese nula de que as médias são iguais. 
+# - Essa abordagem avalia diretamente a diferença entre as médias dos dois grupos.
+
+# Resposta 2: Teste ANOVA considerando "supp" e "dose" e a interação:
+  
+# - O teste ANOVA avalia não apenas a diferença entre as médias dos grupos "OJ" e "VC" (efeito de "supp") mas também considera o
+#   efeito da variável "dose" e a interação entre "supp" e "dose". O valor-p global para o teste ANOVA é < 0.05, indicando que 
+#   pelo menos um dos fatores ou a interação entre eles tem um efeito significativo nas médias. O efeito significativo de "dose" 
+#   sugere que a dose do suplemento tem impacto nas médias dos grupos.
+
+# Conclusão:
+  
+# - Ambas as abordagens indicam que há algo acontecendo com os grupos "OJ" e "VC". A resposta pode variar dependendo do foco. 
+
+# - Se a ênfase for na diferença direta entre as médias dos grupos "OJ" e "VC", a Resposta 1 é mais apropriada. 
+#   Se a análise incluir a influência da variável "dose" e a interação, a Resposta 2 oferece uma visão mais abrangente.
+
+# - Portanto, ambas as respostas estão corretas, e a escolha entre elas depende do escopo e dos objetivos específicos da análise. 
 
 
 
@@ -207,6 +240,8 @@ qplot(supp,
 
 # - Analisando o BoxPlot acima podemos interpretar que parece haver uma diferença no crescimento dos dentes,
 #   associada ao tipo de suplemento. Será necessário validar.
+
+# - Este boxplot não está levando com consideração a variável "dose"
 
 
 
