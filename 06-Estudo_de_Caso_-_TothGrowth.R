@@ -392,7 +392,13 @@ summary(teste_anova2)
 
 
 
+## Indo além
 
+# - Como percebemos pelo teste ANOVA, o que faz diferença é a dosagem do suplemento
 
+# - Sendo assim, podemos validar isso com um Modelo De Reressão Linear
+
+modelo_lm <- lm(len ~ supp + dose, dados)
+summary(modelo_lm)
 
 
