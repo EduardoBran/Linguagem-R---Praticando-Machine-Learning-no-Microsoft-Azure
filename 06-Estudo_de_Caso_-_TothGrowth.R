@@ -147,7 +147,7 @@ t.test(tipo_OJ$len, tipo_VC$len, alternative = "two.sided")  # p-value = 0.06063
 #   efeito da dose, incluindo possíveis interações.
 
 
-teste_anova <- aov(len ~ supp * dose, data = dados) 
+teste_anova <- aov(len ~ supp * dose, data = dados)
 teste_anova
 
 summary(teste_anova)
@@ -323,9 +323,72 @@ t.test(tipo_OJ$len, tipo_VC$len, alternative = "two.sided")  # p-value = 0.06063
 
 
 
+## SOLUÇÃO 2: Aplicar o teste ANOVA a fim de verificar se as dosagens dos tipos de suplemento é que causam impacto no crescimento
+#             dos dentes dos animais.
+
+# - Diferentemente da da resposta pessoal 1 e da solução 1 vamos abordar a seguinte questão:
+
+#  -> "Será que a dosagem do suplemento é que realmente faz a diferença e não o tipo de suplemento?"
 
 
 
+# Para aplicarmos o teste ANOVA, temos as seguintes suposições:
+
+#  1 -> Dentro de cada amostra, as observações são amostradas aleatoriamente e independemente umas das outras.
+#  2 -> Cada amostra de grupo é extraída de uma população normalmente distribuída.
+#       (precisaremos verificar se os dados seguem uma distribuição normal, tal como suposição 4 do teste t)
+
+
+# Iremos considerar a suposição 1 como verdadeira (não temos como verificar a veracidade dos dados)
+
+
+## Validando Suposição 5
+
+# - Assim como na suposição 4 do teste t, iremos dividir nossos dados em grupos de acordo com as doses.
+
+
+# Verifica quais tipos de valor de dose
+unique(dados$dose)
+
+
+# Separando as doses por grupo
+
+dose_0_5 <-              # dose_0_5 <- dados$len[dados$dose == 0.5]
+  dados %>% 
+  filter(dose == 0.5)
+
+dose_1_0 <-              # dose_1_0 <- dados$len[dados$dose == 1.0]
+  dados %>% 
+  filter(dose == 1.0)
+
+dose_2_0 <-              # dose_2_0 <- dados$len[dados$dose == 2.0]
+  dados %>% 
+  filter(dose == 2.0)
+
+
+# Aplicando teste de Normalidade Shapiro-Wilk em cada grupo
+
+shapiro.test(dose_0_5$len) # valor-p = 0.2466 (ou seja, maior que 0.05)
+shapiro.test(dose_1_0$len) # valor-p = 0.1639 (ou seja, maior que 0.05)
+shapiro.test(dose_2_0$len) # valor-p = 0.9019 (ou seja, maior que 0.05)
+
+## Conclusão
+
+# - O valor-p de todos os 3 grupos são maiores que 0.05, logo as 3 amostras são distribuídas.
+#   A suposição foi validada.
+
+
+# Teste Anova
+
+teste_anova2 <- aov(len ~ dose, dados)
+summary(teste_anova2)
+
+# - Com base nesta análise unidirecional, a dosagem tem um efeito muito significativo no comprimento do dente.
+
+
+## Conclusão
+
+# - O tipo de suplemento não parece fazer diferença. O que faz a diferença é a dosagem do suplemento.
 
 
 
