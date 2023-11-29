@@ -402,3 +402,19 @@ modelo_lm <- lm(len ~ supp + dose, dados)
 summary(modelo_lm)
 
 
+
+
+
+
+
+
+
+
+
+
+
+# Vamos supor que você deseja salvar o dataframe 'dados' em um arquivo chamado 'dados.csv'
+write.csv(tipo_OJ, file = "dados_TothGrowth_tipo_OJ.csv", row.names = FALSE)
+write.csv(tipo_VC, file = "dados_TothGrowth_tipo_VC.csv", row.names = FALSE)
+write.csv(dados, file = "dados_TothGrowth.csv", row.names = FALSE)
+
