@@ -10,6 +10,8 @@ getwd()
 library(rpart)       # Um dos diversos pacotes para arvores de recisao em R
 library(rpart.plot)  # outro pacote para visualizaco ficar mais legivel
 
+library(caTools)   # contém a função sample.split() que cria uma amostra que irá fazer a divisão entre dados de treinos e testes
+
 
 
 #### EXERCÍCIO 1 - CRIAR UM MODELO DE ÁVORE DE DECISÃO
@@ -112,6 +114,100 @@ previsoes <- predict(modelo_arvore, conjunto_teste, type = "class")
 
 
 
+
+
+
+
+#################   RESPOSTA PROFESSOR   #################
+
+
+dados = kyphosis
+
+
+## Exercício
+
+# a) Após explorar o dataset, crie um modelo de árvore de decisão
+
+arvore <- rpart(Kyphosis ~ ., method = "class", data = dados)
+
+class(arvore)
+
+arvore
+
+# - foi escolhido o "method = "class" porque estamos prevendo uma categoria (variável Kyphosis é facotr categórica)
+
+
+
+
+# b) Examine o resultado de uma árvore de decisao, para isso existem diversas funcões, mas você pode usar printcp()
+#    ( Exemplo: " prp(arvore) " )
+
+printcp(arvore)
+
+
+
+# c) Visualize a ávore (execute uma função para o plot e outra para o texto no plot).
+#    Utilize o zoom para visualizar melhor o gráfico.
+
+plot(arvore, uniform = TRUE, main = "Árvore de Decisão em R")
+text(arvore, use.n = TRUE, all = TRUE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### REALIZANDO PREVISÕES E DIVINDO EM TREINO E TESTE
+
+## Dividindo os dados em treino e teste
+amostra <- sample.split(dados$Kyphosis, SplitRatio = 0.80)
+
+treino <- subset(dados, amostra == TRUE)
+teste <- subset(dados, amostra == FALSE)
+
+# -> Lembrando sempre que: Treinamos o modelo com dados de TREINO e fazemos predições com dados de TESTE
+
+
+
+## TREINANDO E VISUALIZANDO MODELO
+
+arvore <- rpart(Kyphosis ~ ., method = "class", data = treino)
+
+printcp(arvore)
+plot(arvore, uniform = TRUE, main = "Árvore de Decisão em R")
+text(arvore, use.n = TRUE, all = TRUE)
+
+
+
+
+## PREVISÕES
+previsoes <- predict(arvore, teste, type = "class")
+previsoes
+
+
+## Visualizando perfomance do modelo
+resultados <- cbind.data.frame(Real = teste$Kyphosis, predictions = previsoes)
+head(resultados)
+
+
+## Criando um vetor de TRUE/FALSE indicando previsões CORRETAS/INCORRETAS
+vetor <- previsoes == teste$Kyphosis
+
+table(vetor)                    # FALSE 4        TRUE 12
+prop.table(table(vetor))        # FALSE 0.25     TRUE 0.75  
 
 
 
