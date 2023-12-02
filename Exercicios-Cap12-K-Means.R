@@ -11,6 +11,8 @@ getwd()
 library(datasets)
 library(cluster) # visualização dos clusters
 library(ggplot2) # Gráficos para Análise Exploratória
+library(caTools)   # contém a função sample.split() que cria uma amostra que irá fazer a divisão entre dados de treinos e testes
+
 
 
 # Carregando Dados
@@ -23,32 +25,70 @@ library(ggplot2) # Gráficos para Análise Exploratória
 dados = iris
 head(dados)
 
+## Verificando dados ausentes
+any(is.na(dados))
+colSums(is.na(dados))
 
-# Veja que os dados claramente possui grupos com caracteristcas similares
+## Tipo de dados
+str(dados)
+summary(dados)
+dim(dados)
+
+## Visualizando os dados
+head(dados)
+View(dados)
+
+## Veja que os dados claramente possui grupos com caracteristcas similares
 ggplot(dados, aes(Petal.Length, Petal.Width, color = Species)) + geom_point(size = 3)
 
 
-# Agora usarmeos o K-Means para tentar agrupar os dados em clusters
+
+
+## Agora usaremos o K-Means para tentar agrupar os dados em clusters
 set.seed(101)
 help(kmeans)
 
+
+
 # Exercício 1 - Usando a função kmeans(), crie um modelo de clustering (aprendizagem não supervisionada). 
 #               Use a documentação, para fazer sua pesquisa.
+#               Neste caso, ja sabemos quantos grupos (clusters) existem em nossos dados (3)
+#               Perceba também que o dataset iris possui 5 colunas, mas estamos usando as 4 primeiras
 
-# - Neste caso, ja sabemos quantos grupos (clusters) existem em nossos dados (3)
-#   Perceba que o dataset iris possui 5 colunas, mas estamos usando as 4 primeiras
+# a) Crie o mdelo e obtennha informação sobre os clusters
 
-# - Obtendo informação sobre os clusters
-#   Foram criados 3 clusters: cluster 1, 2 e 3
+modelo_kmeans <- kmeans(dados[, c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width")], centers = 3)
+modelo_kmeans
 
-# - Perceba que apesar o algoritmo ter feito a divisão dos dados em clusters, houve problema em dividir alguns dos dados, 
-#   que apesar de terem caracteristicas diferentes, ficaram no mesmo cluster
+# -> Foram criados 3 clusters: cluster 1, 2 e 3
 
-help(clusplot)
 
 # Plot
-clusplot(iris, irisCluster$cluster, color = TRUE, shade = TRUE, labels = 0, lines = 0, )
+help(clusplot)
+clusplot(dados, modelo_kmeans$cluster, color = TRUE, shade = TRUE, labels = 0, lines = 0, )
+
+# -> Perceba que apesar o algoritmo ter feito a divisão dos dados em clusters, houve problema em dividir alguns dos dados, 
+#    que apesar de terem caracteristicas diferentes, ficaram no mesmo cluster
 
 
 
+
+
+
+
+
+
+
+
+
+
+#### REALIZANDO PREVISÕES E DIVINDO EM TREINO E TESTE
+
+## Dividindo os dados em treino e teste
+amostra <- sample.split(dados$Species, SplitRatio = 0.80)
+
+treino <- subset(dados, amostra == TRUE)
+teste <- subset(dados, amostra == FALSE)
+
+# -> Lembrando sempre que: Treinamos o modelo com dados de TREINO e fazemos predições com dados de TESTE
 
