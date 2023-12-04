@@ -44,6 +44,7 @@ ggplot(dados, aes(Petal.Length, Petal.Width, color = Species)) + geom_point(size
 
 
 
+
 ## Agora usaremos o K-Means para tentar agrupar os dados em clusters
 set.seed(101)
 help(kmeans)
@@ -69,6 +70,80 @@ clusplot(dados, modelo_kmeans$cluster, color = TRUE, shade = TRUE, labels = 0, l
 
 # -> Perceba que apesar o algoritmo ter feito a divisão dos dados em clusters, houve problema em dividir alguns dos dados, 
 #    que apesar de terem caracteristicas diferentes, ficaram no mesmo cluster
+
+
+
+
+
+
+
+
+
+
+
+##### GABARITO PROFESSOR #####
+
+
+
+# Exercício 1 - Usando a função kmeans(), crie um modelo de clustering (aprendizagem não supervisionada). 
+#               Use a documentação, para fazer sua pesquisa.
+#               Neste caso, ja sabemos quantos grupos (clusters) existem em nossos dados (3)
+#               Perceba também que o dataset iris possui 5 colunas, mas estamos usando as 4 primeiras
+
+# a) Crie o mdelo e obtennha informação sobre os clusters
+
+dadosCluster <- kmeans(dados[, 1:4], centers = 3, nstart = 20)
+dadosCluster
+
+
+# -> Foram criados 3 clusters: cluster 1, 2 e 3
+
+
+# Perceba que apesar o algoritmo ter feito a divisão dos dados em clusters, houve problema em dividir alguns dos dados, 
+# que apesar de terem caracteristicas diferentes, ficaram no mesmo cluster
+table(dadosCluster$cluster, dados$Species)
+
+
+
+
+# Plot para visualizar os clusters
+help(clusplot)
+clusplot(dados, modelo_kmeans$cluster, color = TRUE, shade = TRUE, labels = 0, lines = 0, )
+
+
+# - Como podemos ver no gráfico acima, foi detectado 3 pontos de dados das plantas (3 tipos de planta).
+#   O modelo conseguiu fazer isso encontrando os padrões.
+
+# - Por exemplo, os dados do círculo rosa são dados parecidos (provavelmente tem medidas similares).
+
+# - Agora poderíamos pegar os pontos de dados do círculo rosa e levar para um trabalho de classificação.
+
+
+
+# Resumindo:
+
+# - Primeiro detectar os padrões, dividir os dados em grupos e estudar cada grupo de maneira individual.
+
+# - Foi aplicada neste exercício aprendizado não supervisionada e assim poderíamos aplicar posteriormente aprendizagem
+#   supoervisionada em cada um dos grupos (clusters).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
